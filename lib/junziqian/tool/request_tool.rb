@@ -18,7 +18,7 @@ module Junziqian
           contactStr << contactValues(header_map)
           contactStr << contactValues(ext_info)
 
-          print contactStr.join('')
+          # print contactStr.join('')
           Digest::SHA1.hexdigest(contactStr.join('')).upcase
         end
 
