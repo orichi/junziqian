@@ -30,7 +30,7 @@ module Junziqian
             req_array.sort.each do |array_item|
               contactStr << array_item[0]
               if array_item[1]
-                contactStr << (array_item[1].is_a?(Junziqian::Tool::AttacheUtils) ? array_item[1].value : array_item[1].strip)
+                contactStr << (array_item[1].is_a?(Junziqian::Tool::AttacheUtils) ? array_item[1].value : array_item[1].to_s.strip)
               end
             end
           end
