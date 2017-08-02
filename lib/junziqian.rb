@@ -10,6 +10,8 @@ require 'junziqian/interface/ping'
 require 'junziqian/interface/apply_sign_file_request'
 require 'junziqian/interface/detail_anony_link_request'
 require 'junziqian/interface/file_link_request'
+require 'junziqian/interface/pres_link_request'
+require 'junziqian/interface/sign_status_request'
 
 module Junziqian
   # Your code goes here...
