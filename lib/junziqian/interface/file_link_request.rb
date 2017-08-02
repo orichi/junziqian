@@ -2,9 +2,14 @@ module Junziqian
   module Interface
     class FileLinkRequest < BaseRequest
       attr_accessor :applyNo
+      attr_accessor :storage_path
+      attr_accessor :file_name
 
-      def initialize apply_no
-        self.applyNo = apply_no
+      def initialize options={}
+        self.applyNo = options[:apply_no]
+        self.storage_path = options[:storage_path] || '/tmp'
+        self.file_name = options[:file_name] || "applyNo#{self.applyNo}.pdf"
+        raise 'storage path not exist' unless File.exist?(storage_path)
       end
       def version
         '1.0'
@@ -23,8 +28,7 @@ module Junziqian
       end
 
       def file_path
-        Dir.mkdir(ENV['contract_path']) if  ENV['contract_path'] && Dir.exist?(ENV['contract_path'])
-        ENV['contract_path'] || '/tmp'
+        storage_path
       end
 
 
@@ -33,7 +37,7 @@ module Junziqian
         result = Tool::RequestTool.do_post_by_requestObj(self)
         if result['success'] == true
           link = result['link']
-          system(`curl '#{link}' -o #{file_path}/applyNo#{self.applyNo}.pdf`)
+          system(`curl '#{link}' -o #{file_path}/#{file_name}`)
         else
           'error'
         end
